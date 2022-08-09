@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<errno.h>
+#include<string.h>
+#include "shell.h"
+#include "source.h"
+#include "parser.h"
+#include "executor.h"
+#include "helperfuncs.h"
+
+int main(int argc, char **argv)
+{
+	char *cmd;
+
+	do
+	{
+		print_prompt1();
+		cmd = read_cmd();
+
+		if (!cmd)
+			exit(EXIT_SUCCESS);
+		if (cmd[0] == '\0' || _strcmp(cmd, "\n") == 0)
+		{
+			free(cmd);
+			continue;
+		}
+		if (_strcmp(cmd, "exit\n") == 0)
+		{
+			free(cmd);
+			break;
+		}
+
+		struct source_s src;
+		src.buffer = cmd;
+		src.bufsize = _strlen(cmd);
+		src.surpos = INIT_SRC_POS;
+		parse_and_execute(&src);
+
+		free(cmd);
+	} while(1);
+	exit(EXIT_SUCCESS);
+}
+
+char *read_cmd(void)
+{
+	char *buf = NULL;
+	char *ptr = NULL;
+	char ptrlen = 0;
+	size_t len = 1024;
+
+	while (getline(&buf, &len, stdin))
+	{
+		int buflen = _strlen(buf);
+
+		if (!ptr)
+			ptr = malloc(buflen + 1);
+		else
+		{
+			char *ptr2 = _realloc(ptr, ptrlen, ptrlen + buflen + 1);
+			if (ptr2)
+				ptr = ptr2;
+			else
+			{
+				free(ptr);
+				ptr = NULL;
+			}
+		}
+		if (!ptr)
+		{
+			fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
+			return (NULL);
+		}
+		_strcpy(ptr + ptrlen, buf);
+		if (buf[buflen - 1] == '\n')
+		{
+			if (buflen == 1 || buf[buflen - 2] != '\\')
+				return (ptr);
+			ptr[ptrlen + buflen - 2] = '\0';
+			buflen -= 2;
+			print_prompt2();
+		}
+		ptrlen += buflen;
+	}
+	return (ptr);
+}
