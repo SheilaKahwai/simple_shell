@@ -9,7 +9,7 @@
 #include "node.h"
 #include "executor.h"
 
-char *Search_path(char *file)
+char *search_path(char *file)
 {
 	char *PATH = getenv("PATH");
 	char *p = PATH;
@@ -35,7 +35,7 @@ char *Search_path(char *file)
 
 		strcat(path, file);
 
-		struct statst;
+		struct stat st;
 		if (stat(path, &st) == 0)
 		{
 			if (!S_ISREG(st.st_mode))

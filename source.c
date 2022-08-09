@@ -2,7 +2,7 @@
 #include "shell.h"
 #include "source.h"
 
-void unget_char(sruct source_s *src)
+void unget_char(struct source_s *src)
 {
 	if (src->curpos < 0)
 		return;

@@ -11,6 +11,6 @@ struct token_s
 extern struct token_s eof_token;
 
 struct token_s *tokenize(struct source_s *src);
-void free_token(strcut toen_s *tok);
+void free_token(struct token_s *tok);
 
 #endif

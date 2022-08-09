@@ -3,10 +3,10 @@
 
 void print_prompt1(void)
 {
-	fprint(stderr, "$ ");
+	fprintf(stderr, "$ ");
 }
 
 void print_prompt2(void)
 {
-	fprint(stderr, "> ");
+	fprintf(stderr, "> ");
 }

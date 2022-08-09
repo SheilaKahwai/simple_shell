@@ -23,7 +23,7 @@ void add_to_buf(char c)
 		char *tmp = realloc(tok_buf, tok_bufsize * 2);
 		if (!tmp)
 		{
-			errno = EMONEM;
+			errno = ENOMEM;
 			return;
 		}
 		tok_buf = tmp;
@@ -33,7 +33,7 @@ void add_to_buf(char c)
 
 struct token_s *create_token(char *str)
 {
-	struct tokens *tok = malloc(sizeof(struct token_s));
+	struct token_s *tok = malloc(sizeof(struct token_s));
 
 	if (!tok)
 		return (NULL);
@@ -60,7 +60,7 @@ void free_token(struct token_s *tok)
 	free(tok);
 }
 
-struct token_s *toenize(struct source_s *src)
+struct token_s *tokenize(struct source_s *src)
 {
 	int endloop = 0;
 
