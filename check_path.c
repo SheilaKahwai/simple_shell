@@ -31,7 +31,7 @@ cmd = entry->d_name;
 comp = _strcmpdir(cmd, command);
 if (comp == 0)
 {
-return(*split);
+return (*split);
 }
 if (cmd == NULL)
 {
