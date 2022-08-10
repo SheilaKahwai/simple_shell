@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * find_command - finds command to execute in path routes.
+ * get_command - finds command to execute in path routes.
  * @command: first position of getline input.
  * Return: string of folder for command to be executed.
  **/
-char *find_command(char *command)
+char *get_command(char *command)
 {
 DIR *folder;
 struct dirent *entry;

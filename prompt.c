@@ -37,7 +37,7 @@ void prompt(void)
 		if (child_pid < 0)
 			perror("Error");
 		if (child_pid == 0)
-			identify_string(text);
+			check_string(text);
 		else
 			wait(&status);
 	}

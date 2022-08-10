@@ -18,17 +18,17 @@ char *_strcat(char *src);
 int _strlen(char *str);
 void place(char *str);
 char *findfile(char *command);
-char *find_command(char *command);
+char *get_command(char *command);
 int compare(char *s1, char *s2);
 int _strcmpdir(char *s1, char *s2);
 int charput(char c);
 void place(char *str);
 char *str_concat(char *s1, char *s2);
-int lookforslash(char *cmd);
+int check_slash(char *cmd);
 int compareExit(char *s1, char *s2);
 int compareEnv(char *s1, char *s2);
-void execute_proc(char **cmd);
-char **identify_string(char *parameter);
+void _execute(char **cmd);
+char **check_string(char *);
 void controlC(int sig);
 
 #endif

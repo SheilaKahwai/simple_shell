@@ -1,15 +1,15 @@
 #include "main.h"
 
 /**
- * lookforslash - identifies if first char is a slash.
+ * check_slash - identifies if first char is a slash.
  * @cmd: first string
  * Return: 1 if yes 0 if no.
  */
-int lookforslash(char *cmd)
+int check_slash(char *cmd)
 {
-int cont = 0;
+int i = 0;
 
-while (cmd[cont])
+while (cmd[i])
 {
 if (cmd[0] == '/')
 {
@@ -17,7 +17,7 @@ printf("%c\n", cmd[0]);
 return (1);
 }
 
-cont++;
+i++;
 }
 return (0);
 }
@@ -63,18 +63,18 @@ s2++;
 return (*s1 - *s2);
 }
 /**
- * identify_string - identyfy keyboard input.
- * @parameter: call prompt from another function (prompt)
+ * check_string - identify keyboard input.
+ * @param: call prompt from another function (prompt)
  * Return: str
  **/
-char **identify_string(char *parameter)
+char **check_string(char *param)
 {
 char **buf = malloc(1024 * sizeof(char *));
 char *split;
 int i = 0;
 char *delim = " \t\n";
 
-split = strtok(parameter, delim);
+split = strtok(param, delim);
 
 while (split != NULL)
 {
@@ -82,7 +82,7 @@ buf[i] = split;
 i++;
 split = strtok(NULL, delim);
 }
-execute_proc(buf);
+_execute(buf);
 return (buf);
 
 }
