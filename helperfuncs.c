@@ -1,111 +1,88 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
 
-int _strcmp(char *s1, char *s2)
+/**
+ * _strcmpdir - compares strings to find dir.
+ * @s1: string.
+ * @s2: string.
+ * Return: if match and any other number if otherwise.
+ **/
+int _strcmpdir(char *s1, char *s2)
 {
-	int flag = 0;
-	int i;
-
-	for (i = 0; s1[i] != '\0' || s2[i] != '\0'; i++)
-	{
-		if (s1[i] != s2[i])
-		{
-			flag = s1[i] - s2[i];
-			break;
-		}
-	}
-	return (flag);
+int i = 0;
+for (; (*s2 != '\0' && *s1 != '\0') && *s1 == *s2; s1++)
+{
+if (i == 3)
+break;
+i++;
+s2++;
+}
+return (*s1 - *s2);
 }
 
-char *_strcpy(char *dest, char *src)
+/**
+ * charput - writes the character like putchar
+ * @c: The character to print
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int charput(char c)
 {
-	int len, x;
-	len = 0;
-	while (src[len] != '\0')
-		len++;
-
-	for (x = 0; x < len; x++)
-		dest[x] = src[x];
-
-	dest[x] = '\0';
-	return (dest);
+return (write(1, &c, 1));
 }
 
-char *_strchr(char *s, char c)
+/**
+ * place - similar to puts in C
+ * @str: a pointer the integer we want to set to 402
+ * Return: int
+ */
+void place(char *str)
 {
-	char *flag = NULL;
-	if (s != NULL)
-	{
-		do
-		{
-			if (*s == c)
-			{
-				flag = s;
-				break;
-			}
-		} while (*s++);
-	}
-	return (flag);
+while (*str != '\0')
+{
+charput(*str);
+str++;
+}
 }
 
-char *_strcat(char *dest, char *src)
+/**
+ * _strlen - Len string.
+ * @str: My string.
+ * Return: Length.
+ */
+int _strlen(char *str)
 {
-	int i;
-	int len1 = 0;
-	int len2 = 0;
-
-	for (i = 0; dest[i] != '\0'; i++)
-		len1++;
-	for (i = 0; src[i] != '\0'; i++)
-		len2++;
-	for (i = 0; i <= len2; i++)
-		dest[len1 + i] = src[i];
-	dest[len1 + i] = '\0';
-	return (dest);
+int i;
+for (i = 0; str[i] != '\0'; i++)
+;
+return (i);
 }
 
-int _strlen(char *s)
+/**
+ * str_concat - concatane strings.
+ * @s1: string.
+ * @s2: second string.
+ * Return: strings.
+ */
+char *str_concat(char *s1, char *s2)
 {
-	int x = 0;
-	while (*s != '\0')
-	{
-		x++;
-		s++;
-	}
-	return (x);
+char *a;
+int lens1, lens2, j, i, e;
+if (s1 == NULL)
+s1 = "";
+if (s2 == NULL)
+s2 = "";
+lens1 = _strlen(s1);
+lens2 = _strlen(s2);
+a = malloc(((lens1) + (lens2) + 1) * sizeof(char));
+if (a == NULL)
+return (NULL);
+for (j = 0; j < lens1; j++)
+{
+a[j] = s1[j];
 }
-
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+for (i = lens1, e = 0; e <= lens2; i++, e++)
 {
-	unsigned int i;
-	char *old_ptr;
-	char *new_ptr;
-
-	if (new_size == old_size)
-		return ptr;
-	if (new_size == 0 && ptr != NULL)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	if (ptr == NULL)
-		return (malloc(new_size));
-	new_ptr = malloc(new_size);
-	if (new_ptr == NULL)
-		return (NULL);
-
-	old_ptr = ptr;
-
-	if (new_size < old_size)
-	{
-		for (i = 0; i < new_size; i++)
-			new_ptr[i] = old_ptr[i];
-	}
-	if (new_size > old_size)
-	{
-		for (i = 0; i < old_size; i++)
-			new_ptr[i] = old_ptr[i];
-	}
-	free(ptr);
-	return (new_ptr);
+a[i] = s2[e];
+}
+return (a);
 }
