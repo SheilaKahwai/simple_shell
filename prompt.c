@@ -1,9 +1,7 @@
 #include "main.h"
-
 /**
  * prompt - call prompt from another function
  */
-
 void prompt(void)
 {
 	for (;;)
@@ -19,7 +17,6 @@ void prompt(void)
 			exit(98);
 		if (compareExit(text, "exit") == 0)
 			exit(0);
-
 		if (compareEnv(text, "env") == 0)
 		{
 			while (*environ != NULL)
@@ -29,12 +26,10 @@ void prompt(void)
 						!(_strcmpdir(*environ, "SESSION")) ||
 						!(_strcmpdir(*environ, "COMPIZ_CONFIG_PROFILE")) ||
 						!(_strcmpdir(*environ, "SHLV")) ||
-						!(_strcmpdir(*environ, "HOME")) ||
-						!(_strcmpdir(*environ, "C_IS")) ||
+						!(_strcmpdir(*environ, "HOME")) || !(_strcmpdir(*environ, "C_IS")) ||
 						!(_strcmpdir(*environ, "DESKTOP_SESSION")) ||
 						!(_strcmpdir(*environ, "LOGNAME")) ||
-						!(_strcmpdir(*environ, "TERM")) ||
-						!(_strcmpdir(*environ, "PATH")))
+						!(_strcmpdir(*environ, "TERM")) || !(_strcmpdir(*environ, "PATH")))
 				{
 					place(*environ), place("\n"); }
 				environ++; }}
